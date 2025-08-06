@@ -152,23 +152,30 @@ const Home = () => {
           </section>
         }
 
-        <div>
-          {
-            products.map((product) => <div key={product.id}>
-              <h2 key={product.id}>{product.title}</h2>
-              <img width="80px" src={product.image} alt={`Imagen de ${product.title}`} />
-              <p>${product.price}</p>
-              <p>{product.description}</p>
-              <p><strong>{product.category}</strong></p>
-              {
-                user && <div>
-                  <button onClick={() => handleOpenEdit(product)}>Actualizar</button>
-                  <button onClick={() => handleDelete(product.id)}>Borrar</button>
+        <div className="container mt-4">
+          <div className="row">
+            {products.map((product) => (
+              <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" key={product.id}>
+                <div className="card h-100">
+                  <img src={product.image} className="card-img-top p-3" alt={`Imagen de ${product.title}`} style={{ height: "200px", objectFit: "contain" }} />
+                  <div className="card-body d-flex flex-column">
+                    <h5 className="card-title">{product.title}</h5>
+                    <p className="card-text text-muted">${product.price}</p>
+                    <p className="card-text">{product.description}</p>
+                    <p className="card-text"><strong>{product.category}</strong></p>
+                    {
+                      user &&
+                      <div className="mt-auto">
+                        <button className="btn btn-warning me-2" onClick={() => handleOpenEdit(product)}>Actualizar</button>
+                        <button className="btn btn-danger" onClick={() => handleDelete(product.id)}>Borrar</button>
+                      </div>
+                    }
+                  </div>
                 </div>
-              }
-            </div>)
-          }
-        </div>
+              </div>
+            ))}
+  </div>
+</div>
       </section>
     </Layout>
   )
