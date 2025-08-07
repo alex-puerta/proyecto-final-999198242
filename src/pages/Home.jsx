@@ -11,6 +11,8 @@ const Home = () => {
   const [descriptionEdit, setDescriptionEdit] = useState("")
   const [categoryEdit, setCategoryEdit] = useState("")
   const [imageEdit, setImageEdit] = useState("")
+  const [searchTerm, setSearchTerm] = useState("")
+
 
   // simulando existencia del usuario, proximamente este estado será global
   const { user } = useAuth()
@@ -152,11 +154,25 @@ const Home = () => {
           </section>
         }
 
+        <div className="mb-4">
+         <input
+          type="text"
+          className="form-control"
+          placeholder="Buscar productos..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
+        />
+      </div>
+
         <div className="container mt-4">
           <div className="row">
-            {products.map((product) => (
-              <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" key={product.id}>
-                <div className="card h-100">
+            {products
+              .filter((product) =>
+                product.title.toLowerCase().includes(searchTerm.toLowerCase())
+              )
+              .map((product) => (
+                <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" key={product.id}>
+                  <div className="card h-100">
                   <img src={product.image} className="card-img-top p-3" alt={`Imagen de ${product.title}`} style={{ height: "200px", objectFit: "contain" }} />
                   <div className="card-body d-flex flex-column">
                     <h5 className="card-title">{product.title}</h5>
@@ -172,7 +188,7 @@ const Home = () => {
                     }
                   </div>
                 </div>
-              </div>
+                </div>
             ))}
   </div>
 </div>
