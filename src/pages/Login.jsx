@@ -8,18 +8,27 @@ const Login = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const { login } = useAuth()
+  const [error, setError] = useState("");
 
   const nagivate = useNavigate()
 
   const handleLogin = async (e) => {
     e.preventDefault()
-    console.log({ username, password })
+    setError("")
+    
+    if (!username || !password) {
+      setError("por favor, complete los campos.")
+      return
+    }
+    
     const isLogin = await login(username, password)
 
     if (isLogin) {
       setUsername("")
       setPassword("")
       nagivate("/")
+    } else {
+      setError("Usuario o contraseña incorrectos")
     }
   }
 
@@ -47,6 +56,12 @@ const Login = () => {
           </div>
           <button>Ingresar</button>
         </form>
+        {error && (
+          <div className="alert alert-danger" role="alert">
+            {error}
+           </div>
+)}
+
       </section>
     </Layout>
   )
