@@ -1,14 +1,18 @@
 import { useState } from "react"
 import { Layout } from "../components/Layout"
+import { useAuth } from "../context/UserContext"
 
 const Register = () => {
+  const { register: registerUser } = useAuth()
+
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
     setError("")
     setSuccess("")
@@ -18,18 +22,30 @@ const Register = () => {
       return
     }
 
-    const newUser = {
-      username,
-      email,
-      password
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      setError("ingresa un correo electronico valido")
+      return
     }
 
-    console.log(newUser)
-    setSuccess("Usuario registrado con éxito")
+    if (password.length < 6) {
+      setError("LA contrasena debe contener al menos 6 caracteres")
+      return
+    }
 
-    setUsername("")
-    setEmail("")
-    setPassword("")
+    setLoading(true)
+    const ok = await registerUser({ username, email, password })
+    setLoading(false)
+
+    if (ok) {
+      setSuccess("Usuario registrado con éxito. Sesión iniciada.")
+      setUsername("")
+      setEmail("")
+      setPassword("")
+    }
+    else {
+      setError("No se pudo registrar el usuario. intente nuevamente")
+    }
+
   }
 
   return (

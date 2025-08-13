@@ -28,8 +28,26 @@ const UserProvider = (props) => {
     setUser(null)
   }
 
+  const register = async ({ username, email, password }) => {
+    try {
+      const res = await fetch("https://fakestoreapi.com/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, email, password })
+      })
+
+      if (!res.ok) return false
+
+      // Alta exitosa → simulamos login
+      setUser(true)
+      return true
+    } catch (e) {
+      return false
+    }
+  }
+
   return (
-    <UserContext.Provider value={{ login, logout, user }}>
+    <UserContext.Provider value={{ login, logout, register, user }}>
       {props.children}
     </UserContext.Provider>
   )
