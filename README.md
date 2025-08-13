@@ -50,7 +50,7 @@ Buenas prácticas:
 //Instrucciones para ejecutar localmente
 
 1- Clonar repositorio
-git clone https://github.com/tu-usuario/proyecto-final-999198242.git
+git clone https://github.com/alex-puerta/proyecto-final-999198242
 
 2- Entrar al directorio del proyecto
 cd proyecto-final-999198242
