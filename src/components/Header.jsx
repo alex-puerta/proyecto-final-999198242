@@ -9,15 +9,17 @@ const Header = () => {
   }
 
   return (
-    <header style={{ backgroundColor: "lightblue" }}>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/85/Logo-Test.png" alt="imagen de logo" />
-      <nav>
+    <header>
+      <nav className="container d-flex align-items-center justify-content-between" style={{ padding: "10px 16px" }}>
+
+        <span className="site-logo">UTN Tienda</span>
+
         <ul>
           {/* Links visibles para todos */}
           <li><Link to="/">Inicio</Link></li>
           <li><Link to="/sobre-nosotros">Sobre Nosotros</Link></li>
 
-          {/* Links según estado de autenticacion */}
+          {/* Links según estado de autenticación */}
           {user ? (
             <>
               <li><Link to="/dashboard">Dashboard</Link></li>

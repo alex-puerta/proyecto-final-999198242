@@ -310,3 +310,38 @@ a { transition: color .12s ease, opacity .12s ease; }
 .muted { color: var(--muted); }
 .rounded { border-radius: 12px; }
 .shadow { box-shadow: var(--shadow); }
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  margin: 16px auto;
+  padding: 1.25rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+
+form input, form textarea, form select {
+  border: 1px solid #ced4da !important;
+  background: #fff !important;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 1rem;
+}
+
+form button {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 1rem;
+  margin-top: 2px; 
+}
+
+.app-shell {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+.app-shell main { flex: 1; }
